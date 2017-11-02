@@ -1,0 +1,881 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,tools," />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、前言是否需要找到一款合适你的编辑器，拜托常规编辑器的束缚，那么这篇文章你可以看看。 Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，">
+<meta name="keywords" content="笔记,tools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本编辑利器：Sublime Text3 ，完全操作指南">
+<meta property="og:url" content="http://will-we.com/2017/04/09/文本编辑利器：Sublime-Text3-，完全操作指南/index.html">
+<meta property="og:site_name" content="will-well">
+<meta property="og:description" content="一、前言是否需要找到一款合适你的编辑器，拜托常规编辑器的束缚，那么这篇文章你可以看看。 Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-ac720cf96004dddf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-ed79634fc6c2193b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-4202537b1df4a18c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-62ab17614109d920.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-09T10:22:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本编辑利器：Sublime Text3 ，完全操作指南">
+<meta name="twitter:description" content="一、前言是否需要找到一款合适你的编辑器，拜托常规编辑器的束缚，那么这篇文章你可以看看。 Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1625340-ac720cf96004dddf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://will-we.com/2017/04/09/文本编辑利器：Sublime-Text3-，完全操作指南/"/>
+
+
+
+
+
+  <title> 文本编辑利器：Sublime Text3 ，完全操作指南 | will-well </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">will-well</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://will-we.com/2017/04/09/文本编辑利器：Sublime-Text3-，完全操作指南/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="weir">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="will-well">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="will-well" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                文本编辑利器：Sublime Text3 ，完全操作指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-09T23:57:14+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/04/09/文本编辑利器：Sublime-Text3-，完全操作指南/" class="leancloud_visitors" data-flag-title="文本编辑利器：Sublime Text3 ，完全操作指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>是否需要找到一款合适你的编辑器，拜托常规编辑器的束缚，那么这篇文章你可以看看。</p>
+<p>Sublime Text：一款具有代码高亮、语法提示、自动完成且反应快速的编辑器软件，不仅具有华丽的界面，还支持插件扩展机制，用她来写代码，绝对是一种享受。相比于难于上手的Vim，浮肿沉重的Eclipse，VS，即便体积轻巧迅速启动的Editplus、Notepad++，在SublimeText面前大略显失色，无疑这款性感无比的编辑器是Coding和Writing最佳的选择，没有之一。</p>
+<h1 id="二、软件特点"><a href="#二、软件特点" class="headerlink" title="二、软件特点"></a>二、软件特点</h1><p>1、Sublime Text 是一款跨平台代码编辑器，在Linux、OS X和Windows下均可使用。</p>
+<p>2、Sublime Text 是可扩展的，并包含大量实用插件，我们可以通过安装自己领域的插件来成倍提高工作效率。</p>
+<p>3、Sublime Text 分别是命令行环境和图形界面环境下的最佳选择，同时使用两者会大大提高工作效率。</p>
+<p>4、Sublime Text 为收费软件，建议有能力的人付费使用，以支持开发者。不过不购买也可以一直使用。</p>
+<h1 id="三、软件安装"><a href="#三、软件安装" class="headerlink" title="三、软件安装"></a>三、软件安装</h1><p>1-<strong>官网下载</strong>：在<a href="http://www.sublimetext.com/3" target="_blank" rel="external">sublime text官网</a>选择合适的版本安装<img src="http://upload-images.jianshu.io/upload_images/1625340-ac720cf96004dddf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>2-<strong>本地安装</strong>：（以绿色便携版[Win64bit]安装使用）<br>1）下载文件后使用解压文件解压<br><img src="http://upload-images.jianshu.io/upload_images/1625340-ed79634fc6c2193b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>2）点击“”运行软件<br><img src="http://upload-images.jianshu.io/upload_images/1625340-4202537b1df4a18c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>备注：以上版本请根据自己的需求下载和安装，Linux和macOS的类似，此处略过</p>
+</blockquote>
+<h1 id="四、常规配置"><a href="#四、常规配置" class="headerlink" title="四、常规配置"></a>四、常规配置</h1><h2 id="1-中文汉化"><a href="#1-中文汉化" class="headerlink" title="1-中文汉化"></a>1-中文汉化</h2><p> 1）下载汉化包 ：提供下载链接：<a href="http://pan.baidu.com/s/1i432XcL" target="_blank" rel="external">百度网盘</a></p>
+<p> 2）打开软件加载汉化包：<br>   打开sublime text 3，打开菜单-&gt;preferences-&gt;Browse Packages，进入到文件管理器</p>
+<p> 3）复制解压的 Package 文件：<br><img src="http://upload-images.jianshu.io/upload_images/1625340-62ab17614109d920.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>备注：如果英文技术还可以的话，就可以直接忽略这一步</p>
+</blockquote>
+<h2 id="2-主题设置"><a href="#2-主题设置" class="headerlink" title="2-主题设置"></a>2-主题设置</h2><p>  首选项—&gt;配色方案（选择自己喜欢的，爱倒腾的人员可以自己配置哦）</p>
+<h2 id="3-字体-颜色设置"><a href="#3-字体-颜色设置" class="headerlink" title="3-字体/颜色设置"></a>3-字体/颜色设置</h2><p>  首选项—&gt;设置-用户 将字号修改为适合的大小,。</p>
+<h1 id="五、插件安装"><a href="#五、插件安装" class="headerlink" title="五、插件安装"></a>五、插件安装</h1><h2 id="1-安装方法"><a href="#1-安装方法" class="headerlink" title="1-安装方法"></a>1-安装方法</h2><p>1）安装插件管理神器package control<br>（1）Ctrl + ~打开控制台，复制下面代码粘贴到控制台，回车，等待安装完成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">importurllib.request,os; pf =&apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) );open(os.path.join(ipp, pf),&apos;wb&apos;).write(urllib.request.urlopen(&apos;http://sublime.wbond.net/&apos;+ pf.replace(&apos; &apos;,&apos;%20&apos;)).read())</div></pre></td></tr></table></figure></p>
+<p>（2）等待其安装完成后关闭程序，重新启动“Sublime Text 3”，点开菜单“Preferences”可见“Package Control”项，说明插件管理包已安装成功。</p>
+<p>2）安装其他插件<br>（1）接着使用快捷键Ctrl+Shift+P输入：“Install Package”<br>（2）输入你需要的插件包即可。[可参考：推荐的插件]    </p>
+<p>3） 移除已安装插件<br>（1）同样使用快捷键 Ctrl+Shift+P 输入：“remove package”<br>（2）输入你需要的移除的插件包即可</p>
+<h2 id="2-推荐插件"><a href="#2-推荐插件" class="headerlink" title="2-推荐插件"></a>2-推荐插件</h2><p> 1-<a href="https://www.zhihu.com/question/24736400" target="_blank" rel="external">sublime text 3 插件推荐？ 知乎</a></p>
+<p> 2-<a href="http://www.jianshu.com/p/3cb5c6f2421c" target="_blank" rel="external">如何优雅地使用Sublime Text3 简书</a></p>
+<p> 3.<a href="https://packagecontrol.io/" target="_blank" rel="external">Sunlime Text Package官方链接  官网</a></p>
+<h1 id="六、快捷键使用"><a href="#六、快捷键使用" class="headerlink" title="六、快捷键使用"></a>六、快捷键使用</h1><h2 id="1-主要快捷键列表"><a href="#1-主要快捷键列表" class="headerlink" title="1-主要快捷键列表"></a>1-主要快捷键列表</h2><p>Ctrl+L 选择整行（按住-继续选择下行）</p>
+<p>Ctrl+KK 从光标处删除至行尾</p>
+<p>Ctrl+Shift+K 删除整行</p>
+<p>Ctrl+Shift+D 复制光标所在整行，插入在该行之前</p>
+<p>Ctrl+J 合并行（已选择需要合并的多行时）</p>
+<p>Ctrl+KU 改为大写</p>
+<p>Ctrl+KL 改为小写</p>
+<p>Ctrl+D 选词 （按住-继续选择下个相同的字符串）</p>
+<p>Ctrl+M 光标移动至括号内开始或结束的位置</p>
+<p>Ctrl+Shift+M 选择括号内的内容（按住-继续选择父括号）</p>
+<p>Ctrl+/ 注释整行（如已选择内容，同“Ctrl+Shift+/”效果）</p>
+<p>Ctrl+Shift+/ 注释已选择内容</p>
+<p>Ctrl+Z 撤销</p>
+<p>Ctrl+Y 恢复撤销</p>
+<p>Ctrl+M 光标跳至对应的括号</p>
+<p>Alt+. 闭合当前标签</p>
+<p>Ctrl+Shift+A 选择光标位置父标签对儿</p>
+<p>Ctrl+Shift+[ 折叠代码</p>
+<p>Ctrl+Shift+] 展开代码</p>
+<p>Ctrl+KT 折叠属性</p>
+<p>Ctrl+K0 展开所有</p>
+<p>Ctrl+U 软撤销</p>
+<p>Ctrl+T 词互换</p>
+<p>Tab 缩进 自动完成</p>
+<p>Shift+Tab 去除缩进</p>
+<p>Ctrl+Shift+↑ 与上行互换</p>
+<p>Ctrl+Shift+↓ 与下行互换</p>
+<p>Ctrl+K Backspace 从光标处删除至行首</p>
+<p>Ctrl+Enter 光标后插入行</p>
+<p>Ctrl+Shift+Enter 光标前插入行</p>
+<p>Ctrl+F2 设置书签</p>
+<p>F2 下一个书签</p>
+<p>Shift+F2 上一个书签</p>
+<p>（未完待续……）</p>
+<h1 id="七、文章参考链接"><a href="#七、文章参考链接" class="headerlink" title="七、文章参考链接"></a>七、文章参考链接</h1><p>1-<a href="https://packagecontrol.io/docs" target="_blank" rel="external">Package官方下载说明</a></p>
+<p>2-<a href="http://www.sublimetext.com/docs/3/" target="_blank" rel="external">Sublime Text官方/博客</a></p>
+<p>3-<a href="http://www.sublimetext.com/docs/3/" target="_blank" rel="external">Sublime Text 简书</a></p>
+<p>4-<a href="http://www.cnblogs.com/wind128/p/4409422.html" target="_blank" rel="external">Sublime Text 操作说明（很详细）</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/tools/" rel="tag"># tools</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/14/音乐分享/" rel="next" title="音乐分享">
+                <i class="fa fa-chevron-left"></i> 音乐分享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/09/001零基础学Python：Python简介（一），开始helloworld/" rel="prev" title="001零基础学Python：Python简介（一），开始helloworld">
+                001零基础学Python：Python简介（一），开始helloworld <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weir" />
+          <p class="site-author-name" itemprop="name">weir</p>
+          <p class="site-description motion-element" itemprop="description">will we？will be well；this is weir.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、软件特点"><span class="nav-number">2.</span> <span class="nav-text">二、软件特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、软件安装"><span class="nav-number">3.</span> <span class="nav-text">三、软件安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、常规配置"><span class="nav-number">4.</span> <span class="nav-text">四、常规配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-中文汉化"><span class="nav-number">4.1.</span> <span class="nav-text">1-中文汉化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-主题设置"><span class="nav-number">4.2.</span> <span class="nav-text">2-主题设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-字体-颜色设置"><span class="nav-number">4.3.</span> <span class="nav-text">3-字体/颜色设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、插件安装"><span class="nav-number">5.</span> <span class="nav-text">五、插件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装方法"><span class="nav-number">5.1.</span> <span class="nav-text">1-安装方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-推荐插件"><span class="nav-number">5.2.</span> <span class="nav-text">2-推荐插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、快捷键使用"><span class="nav-number">6.</span> <span class="nav-text">六、快捷键使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-主要快捷键列表"><span class="nav-number">6.1.</span> <span class="nav-text">1-主要快捷键列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、文章参考链接"><span class="nav-number">7.</span> <span class="nav-text">七、文章参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weir</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129962"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("0zS8rNs7ve9eIJxVc3qJjie1-gzGzoHsz", "aESjRj3ls3aaiXIs017T2I6T");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

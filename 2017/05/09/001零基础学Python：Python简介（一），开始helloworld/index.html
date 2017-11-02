@@ -1,0 +1,897 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,总结," />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、Python前言在文章开始撰写之前，其实并没有打算写前言部分内容的，最终觉得还是很重要部分；到底我们学习Python为了什么？  Python具有其他语言的特性并且更加简洁，可以作为启蒙语言；国外大学已经开始使用Python作为基础编程语言教学。 Python可以快速的实现“好玩”的功能；比如：爬虫，脚本……详细参考连接：可以用 Python 编程语言做哪些神奇好玩的–知乎 Python的在">
+<meta name="keywords" content="笔记,总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="001零基础学Python：Python简介（一），开始helloworld">
+<meta property="og:url" content="http://will-we.com/2017/05/09/001零基础学Python：Python简介（一），开始helloworld/index.html">
+<meta property="og:site_name" content="will-well">
+<meta property="og:description" content="一、Python前言在文章开始撰写之前，其实并没有打算写前言部分内容的，最终觉得还是很重要部分；到底我们学习Python为了什么？  Python具有其他语言的特性并且更加简洁，可以作为启蒙语言；国外大学已经开始使用Python作为基础编程语言教学。 Python可以快速的实现“好玩”的功能；比如：爬虫，脚本……详细参考连接：可以用 Python 编程语言做哪些神奇好玩的–知乎 Python的在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-77095c2730175b03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-92d7717b1e6c17ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-33d9f446b25fb93c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-594c562fbefed409.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-d885e64e31f9e200.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-99b2b8026eeec518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-88326b341adbfafb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-c65daa8069b670ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1625340-d5bb14c1e0667a0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-05-09T10:10:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="001零基础学Python：Python简介（一），开始helloworld">
+<meta name="twitter:description" content="一、Python前言在文章开始撰写之前，其实并没有打算写前言部分内容的，最终觉得还是很重要部分；到底我们学习Python为了什么？  Python具有其他语言的特性并且更加简洁，可以作为启蒙语言；国外大学已经开始使用Python作为基础编程语言教学。 Python可以快速的实现“好玩”的功能；比如：爬虫，脚本……详细参考连接：可以用 Python 编程语言做哪些神奇好玩的–知乎 Python的在">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1625340-77095c2730175b03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://will-we.com/2017/05/09/001零基础学Python：Python简介（一），开始helloworld/"/>
+
+
+
+
+
+  <title> 001零基础学Python：Python简介（一），开始helloworld | will-well </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">will-well</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://will-we.com/2017/05/09/001零基础学Python：Python简介（一），开始helloworld/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="weir">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="will-well">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="will-well" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                001零基础学Python：Python简介（一），开始helloworld
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-09T22:20:31+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/09/001零基础学Python：Python简介（一），开始helloworld/" class="leancloud_visitors" data-flag-title="001零基础学Python：Python简介（一），开始helloworld">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1625340-77095c2730175b03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="一、Python前言"><a href="#一、Python前言" class="headerlink" title="一、Python前言"></a>一、Python前言</h2><p>在文章开始撰写之前，其实并没有打算写前言部分内容的，最终觉得还是很重要部分；到底我们学习Python为了什么？</p>
+<ul>
+<li>Python具有其他语言的特性并且更加简洁，可以作为启蒙语言；国外大学已经开始使用Python作为基础编程语言教学。</li>
+<li>Python可以快速的实现“好玩”的功能；比如：爬虫，脚本……<br>详细参考连接：<a href="https://www.zhihu.com/question/21395276" target="_blank" rel="external">可以用 Python 编程语言做哪些神奇好玩的–知乎</a></li>
+<li>Python的在云计算、运维、科学计算、机器学习领域、智能硬件……领域有着众多的发展；Python无愧“胶水语言”的名号。<br><strong> 其实，Python的展望和未来还有很多，但是万丈高楼平地起，而文章也是一个入门导航，还是需要扎实一些编程的基础。而文章尽量通过python来，展开其他语言的特点和概念。 </strong></li>
+</ul>
+<h2 id="二、Python历史"><a href="#二、Python历史" class="headerlink" title="二、Python历史"></a>二、Python历史</h2><p><img src="http://upload-images.jianshu.io/upload_images/1625340-92d7717b1e6c17ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Python的作者"></p>
+<ul>
+<li>1991年，第一个Python编译器(同时也是解释器)诞生（用C语言实现的）</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1625340-33d9f446b25fb93c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最初的Python logo: 由Guido的兄弟Just von Rossum设计"></p>
+<ul>
+<li><p>2000年10月16日 Python 2.0发布，增加了实现完整的<a href="https://zh.wikipedia.org/wiki/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6_(%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A7%91%E5%AD%B8" target="_blank" rel="external">垃圾回收</a>)，并且支持<a href="https://zh.wikipedia.org/wiki/Unicode" target="_blank" rel="external">Unicode</a>。</p>
+</li>
+<li><p>2008年12月3日在Python 3.0于发布，此版不完全兼容之前的Python源代码。不过，很多新特性后来也被移植到旧的Python 2.6/2.7版本。</p>
+</li>
+<li>…<br>参考资料（延伸阅读）：<a href="http://www.cnblogs.com/vamei/archive/2013/02/06/2892628.html" target="_blank" rel="external">Python简史</a></li>
+</ul>
+<h2 id="三、Python特点"><a href="#三、Python特点" class="headerlink" title="三、Python特点"></a>三、Python特点</h2><h3 id="1-设计哲学与定位"><a href="#1-设计哲学与定位" class="headerlink" title="1. 设计哲学与定位"></a>1. 设计哲学与定位</h3><p>Python的设计哲学是<strong>“优雅”、“明确”、“简单”</strong>。Python开发者的哲学是“用一种方法，最好是只有一种方法来做一件事”，也因此它和拥有明显个人风格的其他语言很不一样。在设计Python语言时，如果面临多种选择，Python开发者一般会拒绝花俏的语法，而选择明确没有或者很少有歧义的语法。这些准则被称为“Python格言”。</p>
+<h3 id="2-Python-语言的特点"><a href="#2-Python-语言的特点" class="headerlink" title="2. Python 语言的特点"></a>2. Python 语言的特点</h3><ul>
+<li><p>简单————Python是一种代表简单主义思想的语言。阅读一个良好的Python程序就感觉像是在读英语一样，尽管这个英语的要求非常严格！Python的这种伪代码本质是它最大的优点之一。它使你能够专注于解决问题而不是去搞明白语言本身。</p>
+</li>
+<li><p>易学————就如同你即将看到的一样，Python极其容易上手。前面已经提到了，Python有极其简单的语法。</p>
+</li>
+<li><p>免费、开源————Python是FLOSS（自由/开放源码软件）之一。简单地说，你可以自 由地发布这个软件的拷贝、阅读它的源代码、对它做改动、把它的一部分用于新的自由软件中。FLOSS是基于一个团体分享知识的概念。这是为什么 Python如此优秀的原因之一——它是由一群希望看到一个更加优秀的Python的人创造并经常改进着的。</p>
+</li>
+<li><p>高层语言————当你用Python语言编写程序的时候，你无需考虑诸如如何管理你的程序使用的内存一类的底层细节。</p>
+</li>
+<li><p>可移植性————由于它的开源本质，Python已经被移植在许多平台上（经过改动使它能够工 作在不同平台上）。如果你小心地避免使用依赖于系统的特性，那么你的所有Python程序无需修改就可以在下述任何平台上面运行。这些平台包括 Linux、Windows、FreeBSD、Macintosh、Solaris、OS/2、Amiga、AROS、AS/400、BeOS、OS /390、z/OS、Palm OS、QNX、VMS、Psion、Acom RISC OS、VxWorks、PlayStation、Sharp Zaurus、Windows CE甚至还有PocketPC和Symbian！</p>
+</li>
+<li><p>解释性————这一点需要一些解释。一个用编译性语言比如C或C++写的程序可以从源文件（即 C或C++语言）转换到一个你的计算机使用的语言（二进制代码，即0和1）。这个过程通过编译器和不同的标记、选项完成。当你运行你的程序的时候，连接/ 转载器软件把你的程序从硬盘复制到内存中并且运行。而Python语言写的程序不需要编译成二进制代码。你可以直接从源代码 运行 程序。在计算机内部，Python解释器把源代码转换成称为字节码的中间形式，然后再把它翻译成计算机使用的机器语言并运行。事实上，由于你不再需要担心 如何编译程序，如何确保连接转载正确的库等等，所有这一切使得使用Python更加简单。由于你只需要把你的Python程序拷贝到另外一台计算机上，它 就可以工作了，这也使得你的Python程序更加易于移植。</p>
+</li>
+<li><p>面向对象————Python即支持面向过程的编程也支持面向对象的编程。在“面向过程”的语 言中，程序是由过程或仅仅是可重用代码的函数构建起来的。在“面向对象”的语言中，程序是由数据和功能组合而成的对象构建起来的。与其他主要的语言如 C++和Java相比，Python以一种非常强大又简单的方式实现面向对象编程。</p>
+</li>
+<li><p>可扩展性————如果你需要你的一段关键代码运行得更快或者希望某些算法不公开，你可以把你的部分程序用C或C++编写，然后在你的Python程序中使用它们。</p>
+</li>
+<li><p>可嵌入性————你可以把Python嵌入你的C/C++程序，从而向你的程序用户提供脚本功能。</p>
+</li>
+<li><p>丰富的库————Python标准库确实很庞大。它可以帮助你处理各种工作，包括正则表达式、 文档生成、单元测试、线程、数据库、网页浏览器、CGI、FTP、电子邮件、XML、XML-RPC、HTML、WAV文件、密码系统、GUI（图形用户 界面）、Tk和其他与系统有关的操作。记住，只要安装了Python，所有这些功能都是可用的。这被称作Python的“功能齐全”理念。除了标准库以 外，还有许多其他高质量的库，如wxPython、Twisted和Python图像库等等。</p>
+</li>
+<li><p>概括————Python确实是一种十分精彩又强大的语言。它合理地结合了高性能与使得编写程序简单有趣的特色。</p>
+</li>
+</ul>
+<blockquote>
+<p>Python是语言特性其他语言对比而来，这个内容可以慢慢体会的<br>补充知识： <a href="http://blog.csdn.net/myan/article/details/1923" target="_blank" rel="external">Eric Raymond对于几大开发语言的评价(转载)</a></p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1625340-594c562fbefed409.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="编程语言趣图"></p>
+<h2 id="四、Python开发环境搭建【重点】"><a href="#四、Python开发环境搭建【重点】" class="headerlink" title="四、Python开发环境搭建【重点】"></a>四、Python开发环境搭建【重点】</h2><h3 id="1-概念扩充："><a href="#1-概念扩充：" class="headerlink" title="1.概念扩充："></a>1.概念扩充：</h3><p><strong>运行环境</strong>： 在基本硬件和系统的基础上，为工程化开发和维护使用的一组软件，例如：java的JRE，Python的运行环境等等，主要针对于解释型语言。<br><strong>集成开发环境</strong>（IDE，Integrated Development Environment ）：用于提供程序开发环境的应用程序，一般包括代码编辑器、编译器、调试器和图形用户界面工具。可以进行程序编写开发、调试、打包、发布。</p>
+<h3 id="2-实际操作："><a href="#2-实际操作：" class="headerlink" title="2.实际操作："></a>2.实际操作：</h3><h4 id="1-下载安装"><a href="#1-下载安装" class="headerlink" title="1. 下载安装"></a>1. 下载安装</h4><p>  1-下载地址：<a href="https://www.python.org/downloads/" target="_blank" rel="external">官方下载Python</a></p>
+<blockquote>
+<p>基本上使用next一步步就可以了，注意安装路径后面可能还要用。</p>
+</blockquote>
+<p>  2-版本选择：<a href="https://wiki.python.org/moin/Python2orPython3" target="_blank" rel="external">我应该使用Python 2或Python 3进行开发活动吗？</a></p>
+<blockquote>
+<p>备注：个人主要用python学习，实际项目并没有使用个人使用的Python3版本，这个请根据实际情况选择；请注意：版本之间存在兼容问题。各大互联网公司 70% 的都用是Python2.7。Python2.7到2020年停止维护，基本的语言特性一样迁移一般都会很快</p>
+</blockquote>
+<p>3-打开cmd，切换到 Python安装目录：</p>
+<blockquote>
+<p>切换到后台的安装路径dos命令窗口输入：python 测试一下</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1625340-d885e64e31f9e200.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Python安装OK"></p>
+<h4 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2. 配置环境变量"></a>2. 配置环境变量</h4><p><img src="http://upload-images.jianshu.io/upload_images/1625340-99b2b8026eeec518.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>这样无论在那个路径下都可以使用Dos命令输入：python 都可启动python<br><img src="http://upload-images.jianshu.io/upload_images/1625340-88326b341adbfafb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D盘启动python"></p>
+<h2 id="五、运行hellowolrd程序实例"><a href="#五、运行hellowolrd程序实例" class="headerlink" title="五、运行hellowolrd程序实例"></a>五、运行hellowolrd程序实例</h2><h3 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#适用于Python 3.0以上版本以及Python 2.6、Python 2.7</div><div class="line">print(&quot;Hello, world!&quot;)</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1625340-c65daa8069b670ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果（可以直接复制上面的代码）"><br> “#” 表示注释，不参与编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#适用于Python 2.6以下版本以及Python 2.6、Python 2.7</div><div class="line"> print &quot;Hello, world!&quot;</div></pre></td></tr></table></figure>
+<h3 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h3><p> 编写一个Python源文件，用记事本就行，然后把文件的扩展名改为py，再用 python 这个命令来运行</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1625340-d5bb14c1e0667a0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用Dos命令运行python"></p>
+<h2 id="六、Python的IDE和开发工具"><a href="#六、Python的IDE和开发工具" class="headerlink" title="六、Python的IDE和开发工具"></a>六、Python的IDE和开发工具</h2><h3 id="1-文本编辑利器：Sublime"><a href="#1-文本编辑利器：Sublime" class="headerlink" title="1. 文本编辑利器：Sublime"></a>1. 文本编辑利器：Sublime</h3><p><strong>安装参考文章</strong>：<a href="http://www.jianshu.com/p/52afd697fbe6" target="_blank" rel="external">文本编辑利器：Sublime Text3 ，完全操作指南</a></p>
+<h3 id="2-PyCharm"><a href="#2-PyCharm" class="headerlink" title="2.PyCharm :"></a>2.PyCharm :</h3><p> 下载连接传送门：(<a href="http://www.jetbrains.com/pycharm/" target="_blank" rel="external">http://www.jetbrains.com/pycharm/</a>)<br>本人使用了Sublime，对于完善的IDE的PyCharm使用不多，后续有时间研究下出一个教程吧！</p>
+<h2 id="七、Python学习参考资料（待补充）"><a href="#七、Python学习参考资料（待补充）" class="headerlink" title="七、Python学习参考资料（待补充）"></a>七、Python学习参考资料（待补充）</h2><h3 id="1-在线资料"><a href="#1-在线资料" class="headerlink" title="1. 在线资料"></a>1. 在线资料</h3><h4 id="1-Python-IDE-菜鸟教程"><a href="#1-Python-IDE-菜鸟教程" class="headerlink" title="1-Python IDE | 菜鸟教程"></a>1-<a href="http://www.runoob.com/python/python-tutorial.html" target="_blank" rel="external">Python IDE | 菜鸟教程</a></h4><h4 id="2-Python教程-廖雪峰的官方网站"><a href="#2-Python教程-廖雪峰的官方网站" class="headerlink" title="2-Python教程 - 廖雪峰的官方网站"></a>2-<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="external">Python教程 - 廖雪峰的官方网站</a></h4><h4 id="3-自强学堂Python基础"><a href="#3-自强学堂Python基础" class="headerlink" title="3-自强学堂Python基础"></a>3-<a href="http://www.ziqiangxuetang.com/python/python-tutorial.html" target="_blank" rel="external">自强学堂Python基础</a></h4><h3 id="2-文档资料"><a href="#2-文档资料" class="headerlink" title="2.文档资料"></a>2.文档资料</h3><p> 书籍：<br>1-《简明PYTHON教程》<br>2-官方文档推荐：<a href="https://wiki.python.org/moin/PythonBooks" target="_blank" rel="external">PythonBooks - Python </a><br>3-Python自带帮助文档：<a href="https://docs.python.org/3/" target="_blank" rel="external">帮助文档</a></p>
+<h3 id="3-视频资料"><a href="#3-视频资料" class="headerlink" title="3. 视频资料"></a>3. 视频资料</h3><p>（空缺中……）<br>推荐下 向右奔跑：<a href="http://www.jianshu.com/p/29ee6c699270" target="_blank" rel="external">001 - Python学习有哪些资源推荐</a></p>
+<blockquote>
+<p>目前完整体系视频个人还没有发现，可以去常规的学习视频网站看看，后期遇到不错会更新下，如果有不错的建议和视频都可以回复给我。</p>
+</blockquote>
+<h2 id="标题8"><a href="#标题8" class="headerlink" title="标题8"></a>标题8</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/09/文本编辑利器：Sublime-Text3-，完全操作指南/" rel="next" title="文本编辑利器：Sublime Text3 ，完全操作指南">
+                <i class="fa fa-chevron-left"></i> 文本编辑利器：Sublime Text3 ，完全操作指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/005零基础学Python：Python3-模块-学习笔记/" rel="prev" title="005零基础学Python：Python3 模块--学习笔记">
+                005零基础学Python：Python3 模块--学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="weir" />
+          <p class="site-author-name" itemprop="name">weir</p>
+          <p class="site-description motion-element" itemprop="description">will we？will be well；this is weir.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Python前言"><span class="nav-number">1.</span> <span class="nav-text">一、Python前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Python历史"><span class="nav-number">2.</span> <span class="nav-text">二、Python历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Python特点"><span class="nav-number">3.</span> <span class="nav-text">三、Python特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-设计哲学与定位"><span class="nav-number">3.1.</span> <span class="nav-text">1. 设计哲学与定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Python-语言的特点"><span class="nav-number">3.2.</span> <span class="nav-text">2. Python 语言的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Python开发环境搭建【重点】"><span class="nav-number">4.</span> <span class="nav-text">四、Python开发环境搭建【重点】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念扩充："><span class="nav-number">4.1.</span> <span class="nav-text">1.概念扩充：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实际操作："><span class="nav-number">4.2.</span> <span class="nav-text">2.实际操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-下载安装"><span class="nav-number">4.2.1.</span> <span class="nav-text">1. 下载安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-配置环境变量"><span class="nav-number">4.2.2.</span> <span class="nav-text">2. 配置环境变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、运行hellowolrd程序实例"><span class="nav-number">5.</span> <span class="nav-text">五、运行hellowolrd程序实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一："><span class="nav-number">5.1.</span> <span class="nav-text">方式一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二："><span class="nav-number">5.2.</span> <span class="nav-text">方式二：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Python的IDE和开发工具"><span class="nav-number">6.</span> <span class="nav-text">六、Python的IDE和开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-文本编辑利器：Sublime"><span class="nav-number">6.1.</span> <span class="nav-text">1. 文本编辑利器：Sublime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-PyCharm"><span class="nav-number">6.2.</span> <span class="nav-text">2.PyCharm :</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Python学习参考资料（待补充）"><span class="nav-number">7.</span> <span class="nav-text">七、Python学习参考资料（待补充）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在线资料"><span class="nav-number">7.1.</span> <span class="nav-text">1. 在线资料</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Python-IDE-菜鸟教程"><span class="nav-number">7.1.1.</span> <span class="nav-text">1-Python IDE | 菜鸟教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Python教程-廖雪峰的官方网站"><span class="nav-number">7.1.2.</span> <span class="nav-text">2-Python教程 - 廖雪峰的官方网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-自强学堂Python基础"><span class="nav-number">7.1.3.</span> <span class="nav-text">3-自强学堂Python基础</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文档资料"><span class="nav-number">7.2.</span> <span class="nav-text">2.文档资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-视频资料"><span class="nav-number">7.3.</span> <span class="nav-text">3. 视频资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标题8"><span class="nav-number">8.</span> <span class="nav-text">标题8</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weir</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129962"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("0zS8rNs7ve9eIJxVc3qJjie1-gzGzoHsz", "aESjRj3ls3aaiXIs017T2I6T");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
