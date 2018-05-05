@@ -1,0 +1,933 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,后端," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="上一节“[原创]Spring教程01–Spring开始篇_Helloworld”中简单的介绍SpringFramwork的简单使用；通过Helloworld的程序做演示，本节将继续解读Spring的Ioc容器实现和分析。  Spring IoC容器启动过程 Spring的IoC容器启动大致分为下面的三个步骤：Resource定位、Resoure的载入、Resoured的注册 三个步骤；下面使用">
+<meta name="keywords" content="笔记,后端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原创]Spring源码教程02--Spring的IoC容器分析">
+<meta property="og:url" content="http://will-we.com/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/index.html">
+<meta property="og:site_name" content="will-well">
+<meta property="og:description" content="上一节“[原创]Spring教程01–Spring开始篇_Helloworld”中简单的介绍SpringFramwork的简单使用；通过Helloworld的程序做演示，本节将继续解读Spring的Ioc容器实现和分析。  Spring IoC容器启动过程 Spring的IoC容器启动大致分为下面的三个步骤：Resource定位、Resoure的载入、Resoured的注册 三个步骤；下面使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/0CB007BC3700402BA8B2E7F6FD03E89F/9504">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/3DCDEE2C99D5423291D90886E8522625/9597">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/F24CFF73F98B4C098F1CB2A3DEEEC92B/9683">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/F110AD4536174D74B86277B26EE16E20/9706">
+<meta property="og:updated_time" content="2018-05-05T09:54:30.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原创]Spring源码教程02--Spring的IoC容器分析">
+<meta name="twitter:description" content="上一节“[原创]Spring教程01–Spring开始篇_Helloworld”中简单的介绍SpringFramwork的简单使用；通过Helloworld的程序做演示，本节将继续解读Spring的Ioc容器实现和分析。  Spring IoC容器启动过程 Spring的IoC容器启动大致分为下面的三个步骤：Resource定位、Resoure的载入、Resoured的注册 三个步骤；下面使用">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/0CB007BC3700402BA8B2E7F6FD03E89F/9504">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://will-we.com/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/"/>
+
+
+
+
+
+  <title> [原创]Spring源码教程02--Spring的IoC容器分析 | will-well </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+ 
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">will-well</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            相册
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://will-we.com/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="weir">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="will-well">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="will-well" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [原创]Spring源码教程02--Spring的IoC容器分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T17:52:19+02:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+		  
+          
+            <span class="post-letters-count">
+              &nbsp; | &nbsp;
+              <span>1,660 字</span>
+              &nbsp; | &nbsp;
+              <span>8 min</span>
+            </span>
+          
+		  
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/" class="leancloud_visitors" data-flag-title="[原创]Spring源码教程02--Spring的IoC容器分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="\assets\js\APlayer.min.js"> </script><blockquote>
+<p>上一节<a href="http://will-we.com/2018/01/21/%E5%8E%9F%E5%88%9B-Spring%E6%95%99%E7%A8%8B01-Spring%E5%BC%80%E5%A7%8B%E7%AF%87-Helloworld/">“[原创]Spring教程01–Spring开始篇_Helloworld”</a>中简单的介绍SpringFramwork的简单使用；通过Helloworld的程序做演示，本节将继续解读Spring的Ioc容器实现和分析。</p>
+</blockquote>
+<h2 id="Spring-IoC容器启动过程"><a href="#Spring-IoC容器启动过程" class="headerlink" title="Spring IoC容器启动过程"></a>Spring IoC容器启动过程</h2><blockquote>
+<p>Spring的IoC容器启动大致分为下面的三个步骤：<strong>Resource定位</strong>、<strong>Resoure的载入</strong>、<strong>Resoured的注册</strong> 三个步骤；下面使用xml文件配置方式显示的配置方式步骤：</p>
+</blockquote>
+<p><img src="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/0CB007BC3700402BA8B2E7F6FD03E89F/9504" alt="启动过程"></p>
+<p>首先看下ApplicationContext的构造方法定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileSystemXmlApplicationContext</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">		String[] configLocations, <span class="keyword">boolean</span> refresh, @Nullable ApplicationContext parent)</span></span></div><div class="line"><span class="function">		<span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//设置Context</span></div><div class="line">	<span class="keyword">super</span>(parent);</div><div class="line">	<span class="comment">//读取XML等配置文件定位</span></div><div class="line">	setConfigLocations(configLocations);</div><div class="line">	<span class="comment">//创建BeanFactory的关键[重点]</span></div><div class="line">	<span class="keyword">if</span> (refresh) &#123;</div><div class="line">		refresh();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="comment">//这个refresh()启动容器[重要的放在首位]</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</div><div class="line">	<span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</div><div class="line">		<span class="comment">// Prepare this context for refreshing.</span></div><div class="line">		prepareRefresh();</div><div class="line"></div><div class="line">		<span class="comment">// Tell the subclass to refresh the internal bean factory.</span></div><div class="line">		ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</div><div class="line"></div><div class="line">		<span class="comment">// Prepare the bean factory for use in this context.</span></div><div class="line">		prepareBeanFactory(beanFactory);</div><div class="line"></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// Allows post-processing of the bean factory in context subclasses.</span></div><div class="line">			postProcessBeanFactory(beanFactory);</div><div class="line"></div><div class="line">			<span class="comment">// Invoke factory processors registered as beans in the context.</span></div><div class="line">			invokeBeanFactoryPostProcessors(beanFactory);</div><div class="line"></div><div class="line">			<span class="comment">// Register bean processors that intercept bean creation.</span></div><div class="line">			registerBeanPostProcessors(beanFactory);</div><div class="line"></div><div class="line">			<span class="comment">// Initialize message source for this context.</span></div><div class="line">			initMessageSource();</div><div class="line"></div><div class="line">			<span class="comment">// Initialize event multicaster for this context.</span></div><div class="line">			initApplicationEventMulticaster();</div><div class="line"></div><div class="line">			<span class="comment">// Initialize other special beans in specific context subclasses.</span></div><div class="line">			onRefresh();</div><div class="line"></div><div class="line">			<span class="comment">// Check for listener beans and register them.</span></div><div class="line">			registerListeners();</div><div class="line"></div><div class="line">			<span class="comment">// Instantiate all remaining (non-lazy-init) singletons.</span></div><div class="line">			finishBeanFactoryInitialization(beanFactory);</div><div class="line"></div><div class="line">			<span class="comment">// Last step: publish corresponding event.</span></div><div class="line">			finishRefresh();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">catch</span> (BeansException ex) &#123;</div><div class="line">			<span class="keyword">if</span> (logger.isWarnEnabled()) &#123;</div><div class="line">				logger.warn(<span class="string">"Exception encountered during context initialization - "</span> +</div><div class="line">						<span class="string">"cancelling refresh attempt: "</span> + ex);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// Destroy already created singletons to avoid dangling resources.</span></div><div class="line">			destroyBeans();</div><div class="line"></div><div class="line">			<span class="comment">// Reset 'active' flag.</span></div><div class="line">			cancelRefresh(ex);</div><div class="line"></div><div class="line">			<span class="comment">// Propagate exception to caller.</span></div><div class="line">			<span class="keyword">throw</span> ex;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">finally</span> &#123;</div><div class="line">			<span class="comment">// Reset common introspection caches in Spring's core, since we</span></div><div class="line">			<span class="comment">// might not ever need metadata for singleton beans anymore...</span></div><div class="line">			resetCommonCaches();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Resource定位"><a href="#Resource定位" class="headerlink" title="Resource定位"></a>Resource定位</h3><p>为了便于理解；提前解析了Context的属性如下：<br>对象名 | 类  型 | 作  用 | 归属类<br>—|—|—|—|<br>configResources | Resource[] | 配置文件资源对象数组 | ClassPathXmlApplicationContext<br>configLocations | String[] | 配置文件字符串数组，存储配置文件路径 | AbstractRefreshableConfigApplicationContext<br>beanFactory | DefaultListableBeanFactory | 上下文使用的Bean工厂 | AbstractRefreshableApplicationContext<br>beanFactoryMonitor | Object | Bean工厂使用的同步监视器 | AbstractRefreshableApplicationContext<br>id | String | 上下文使用的唯一Id，标识此ApplicationContext | AbstractApplicationContext<br>parent | ApplicationContext | 父级ApplicationContext | AbstractApplicationContext<br>beanFactoryPostProcessors | List<beanfactorypostprocessor> | 存储BeanFactoryPostProcessor接口，Spring提供的一个扩展点 | AbstractApplicationContext<br>startupShutdownMonitor | Object | refresh方法和destory方法公用的一个监视器，避免两个方法同时执行 | AbstractApplicationContext<br>shutdownHook | Thread | Spring提供的一个钩子，JVM停止执行时会运行Thread里面的方法 | AbstractApplicationContext<br>resourcePatternResolver | ResourcePatternResolver | 上下文使用的资源格式解析器 | AbstractApplicationContext<br>lifecycleProcessor | LifecycleProcessor | 用于管理Bean生命周期的生命周期处理器接口 | AbstractApplicationContext<br>messageSource | MessageSource | 用于实现国际化的一个接口 | AbstractApplicationContext<br>applicationEventMulticaster | ApplicationEventMulticaster | Spring提供的事件管理机制中的事件多播器接口 | AbstractApplicationContext<br>applicationListeners | Set<applicationlistener> | Spring提供的事件管理机制中的应用监听器 | AbstractApplicationContext</applicationlistener></beanfactorypostprocessor></p>
+<p>1）<strong>设置存储配置文件路径</strong></p>
+<p>AbstractRefreshableConfigApplicationContext 的 setConfigLocations() 方法确定其文件的位置；代码比较简单。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConfigLocations</span><span class="params">(@Nullable String... locations)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (locations != <span class="keyword">null</span>) &#123;</div><div class="line">		Assert.noNullElements(locations, <span class="string">"Config locations must not be null"</span>);</div><div class="line">		<span class="keyword">this</span>.configLocations = <span class="keyword">new</span> String[locations.length];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; locations.length; i++) &#123;</div><div class="line">			<span class="keyword">this</span>.configLocations[i] = resolvePath(locations[i]).trim();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">this</span>.configLocations = <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的过程；我们获取配置文件的路径内容。下面看看具体的IoC容器的创建的具体过程了。</p>
+<p>2）<strong>加载配置文件的路径</strong></p>
+<p><img src="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/3DCDEE2C99D5423291D90886E8522625/9597" alt="方法堆栈信息"></p>
+<p>（1）创建BeanFactory<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">refreshBeanFactory</span><span class="params">()</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">	<span class="keyword">if</span> (hasBeanFactory()) &#123;</div><div class="line">		destroyBeans();</div><div class="line">		closeBeanFactory();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		DefaultListableBeanFactory beanFactory = createBeanFactory();</div><div class="line">		beanFactory.setSerializationId(getId());</div><div class="line">		customizeBeanFactory(beanFactory);</div><div class="line">		loadBeanDefinitions(beanFactory);</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>.beanFactoryMonitor) &#123;</div><div class="line">			<span class="keyword">this</span>.beanFactory = beanFactory;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">catch</span> (IOException ex) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> ApplicationContextException(<span class="string">"I/O error parsing bean definition source for "</span> + getDisplayName(), ex);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（2）读取文件配置<br>这个中间调用过程省略了；直接看结果：这里直接看log日志结果我们不用说太多了…<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">loadBeanDefinitions</span><span class="params">(EncodedResource encodedResource)</span> <span class="keyword">throws</span> BeanDefinitionStoreException </span>&#123;</div><div class="line">	Assert.notNull(encodedResource, <span class="string">"EncodedResource must not be null"</span>);</div><div class="line">	<span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</div><div class="line">		logger.info(<span class="string">"Loading XML bean definitions from "</span> + encodedResource.getResource());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	Set&lt;EncodedResource&gt; currentResources = <span class="keyword">this</span>.resourcesCurrentlyBeingLoaded.get();</div><div class="line">	<span class="keyword">if</span> (currentResources == <span class="keyword">null</span>) &#123;</div><div class="line">		currentResources = <span class="keyword">new</span> HashSet&lt;&gt;(<span class="number">4</span>);</div><div class="line">		<span class="keyword">this</span>.resourcesCurrentlyBeingLoaded.set(currentResources);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (!currentResources.add(encodedResource)) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(</div><div class="line">				<span class="string">"Detected cyclic loading of "</span> + encodedResource + <span class="string">" - check your import definitions!"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		InputStream inputStream = encodedResource.getResource().getInputStream();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputSource inputSource = <span class="keyword">new</span> InputSource(inputStream);</div><div class="line">			<span class="keyword">if</span> (encodedResource.getEncoding() != <span class="keyword">null</span>) &#123;</div><div class="line">				inputSource.setEncoding(encodedResource.getEncoding());</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//下面开始解析XML方法</span></div><div class="line">			<span class="keyword">return</span> doLoadBeanDefinitions(inputSource, encodedResource.getResource());</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">finally</span> &#123;</div><div class="line">			inputStream.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">catch</span> (IOException ex) &#123;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(</div><div class="line">				<span class="string">"IOException parsing XML document from "</span> + encodedResource.getResource(), ex);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">finally</span> &#123;</div><div class="line">		currentResources.remove(encodedResource);</div><div class="line">		<span class="keyword">if</span> (currentResources.isEmpty()) &#123;</div><div class="line">			<span class="keyword">this</span>.resourcesCurrentlyBeingLoaded.remove();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Resource的载入"><a href="#Resource的载入" class="headerlink" title="Resource的载入"></a>Resource的载入</h3><p>下面我们接着根据路径配置，读取到内存中；采用SAX文件的解析；看源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">doLoadBeanDefinitions</span><span class="params">(InputSource inputSource, Resource resource)</span></span></div><div class="line"><span class="function">	<span class="keyword">throws</span> BeanDefinitionStoreException </span>&#123;</div><div class="line">    ...</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	Document doc = doLoadDocument(inputSource, resource);</div><div class="line">	<span class="comment">//解析xml文件注册JavaBean</span></div><div class="line">	<span class="keyword">return</span> registerBeanDefinitions(doc, resource);</div><div class="line">&#125;</div><div class="line">    ...</div><div class="line">    <span class="comment">//省略catch()代码...</span></div></pre></td></tr></table></figure></p>
+<h3 id="Resouce文件的解析"><a href="#Resouce文件的解析" class="headerlink" title="Resouce文件的解析"></a>Resouce文件的解析</h3><p><img src="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/F24CFF73F98B4C098F1CB2A3DEEEC92B/9683" alt="方法堆栈"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doRegisterBeanDefinitions</span><span class="params">(Element root)</span> </span>&#123;</div><div class="line">	BeanDefinitionParserDelegate parent = <span class="keyword">this</span>.delegate;</div><div class="line">	<span class="keyword">this</span>.delegate = createDelegate(getReaderContext(), root, parent);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.delegate.isDefaultNamespace(root)) &#123;</div><div class="line">		String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);</div><div class="line">		<span class="keyword">if</span> (StringUtils.hasText(profileSpec)) &#123;</div><div class="line">			String[] specifiedProfiles = StringUtils.tokenizeToStringArray(</div><div class="line">					profileSpec, BeanDefinitionParserDelegate.MULTI_VALUE_ATTRIBUTE_DELIMITERS);</div><div class="line">			<span class="keyword">if</span> (!getReaderContext().getEnvironment().acceptsProfiles(specifiedProfiles)) &#123;</div><div class="line">				<span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</div><div class="line">					logger.info(<span class="string">"Skipped XML bean definition file due to specified profiles ["</span> + profileSpec +</div><div class="line">							<span class="string">"] not matching: "</span> + getReaderContext().getResource());</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	preProcessXml(root);</div><div class="line">	<span class="comment">//重点代码：注册JavaBean</span></div><div class="line">	parseBeanDefinitions(root, <span class="keyword">this</span>.delegate);</div><div class="line">	postProcessXml(root);</div><div class="line"></div><div class="line">	<span class="keyword">this</span>.delegate = parent;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实写到这里感觉大家有兴趣的可以继续看看这个；如何读取xml文件如理 <code>&lt;bean&gt;</code> 等标签的操作…这里我推荐一片文章吧： <a href="http://www.spring4all.com/article/501" target="_blank" rel="external">Spring解密 - XML解析 与 Bean注册</a>；后面写的比较具体。截止到目前通过XML解析；将配置文件读取到BeanDefine中；下面看看如何将其注册到IoC容器。</p>
+<h3 id="注册IoC容器"><a href="#注册IoC容器" class="headerlink" title="注册IoC容器"></a>注册IoC容器</h3><p><img src="https://note.youdao.com/yws/public/resource/8fd44a758473aafe6eb3e6eb131995fd/xmlnote/F110AD4536174D74B86277B26EE16E20/9706" alt=""><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinition</span><span class="params">(String beanName, BeanDefinition beanDefinition)</span></span></div><div class="line"><span class="function">		<span class="keyword">throws</span> BeanDefinitionStoreException </span>&#123;</div><div class="line"></div><div class="line">	Assert.hasText(beanName, <span class="string">"Bean name must not be empty"</span>);</div><div class="line">	Assert.notNull(beanDefinition, <span class="string">"BeanDefinition must not be null"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (beanDefinition <span class="keyword">instanceof</span> AbstractBeanDefinition) &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			((AbstractBeanDefinition) beanDefinition).validate();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span> (BeanDefinitionValidationException ex) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,</div><div class="line">					<span class="string">"Validation of bean definition failed"</span>, ex);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	BeanDefinition oldBeanDefinition;</div><div class="line"></div><div class="line">	oldBeanDefinition = <span class="keyword">this</span>.beanDefinitionMap.get(beanName);</div><div class="line">	<span class="keyword">if</span> (oldBeanDefinition != <span class="keyword">null</span>) &#123;</div><div class="line">		<span class="keyword">if</span> (!isAllowBeanDefinitionOverriding()) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,</div><div class="line">					<span class="string">"Cannot register bean definition ["</span> + beanDefinition + <span class="string">"] for bean '"</span> + beanName +</div><div class="line">					<span class="string">"': There is already ["</span> + oldBeanDefinition + <span class="string">"] bound."</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (oldBeanDefinition.getRole() &lt; beanDefinition.getRole()) &#123;</div><div class="line">			<span class="comment">// e.g. was ROLE_APPLICATION, now overriding with ROLE_SUPPORT or ROLE_INFRASTRUCTURE</span></div><div class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.logger.isWarnEnabled()) &#123;</div><div class="line">				<span class="keyword">this</span>.logger.warn(<span class="string">"Overriding user-defined bean definition for bean '"</span> + beanName +</div><div class="line">						<span class="string">"' with a framework-generated bean definition: replacing ["</span> +</div><div class="line">						oldBeanDefinition + <span class="string">"] with ["</span> + beanDefinition + <span class="string">"]"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (!beanDefinition.equals(oldBeanDefinition)) &#123;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.logger.isInfoEnabled()) &#123;</div><div class="line">				<span class="keyword">this</span>.logger.info(<span class="string">"Overriding bean definition for bean '"</span> + beanName +</div><div class="line">						<span class="string">"' with a different definition: replacing ["</span> + oldBeanDefinition +</div><div class="line">						<span class="string">"] with ["</span> + beanDefinition + <span class="string">"]"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.logger.isDebugEnabled()) &#123;</div><div class="line">				<span class="keyword">this</span>.logger.debug(<span class="string">"Overriding bean definition for bean '"</span> + beanName +</div><div class="line">						<span class="string">"' with an equivalent definition: replacing ["</span> + oldBeanDefinition +</div><div class="line">						<span class="string">"] with ["</span> + beanDefinition + <span class="string">"]"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//将获取BeanName和之前解析BeanDefine放入Map集合中从而完成注册</span></div><div class="line">		<span class="keyword">this</span>.beanDefinitionMap.put(beanName, beanDefinition);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (hasBeanCreationStarted()) &#123;</div><div class="line">			<span class="comment">// Cannot modify startup-time collection elements anymore (for stable iteration)</span></div><div class="line">			<span class="keyword">synchronized</span> (<span class="keyword">this</span>.beanDefinitionMap) &#123;</div><div class="line">				<span class="keyword">this</span>.beanDefinitionMap.put(beanName, beanDefinition);</div><div class="line">				List&lt;String&gt; updatedDefinitions = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="keyword">this</span>.beanDefinitionNames.size() + <span class="number">1</span>);</div><div class="line">				updatedDefinitions.addAll(<span class="keyword">this</span>.beanDefinitionNames);</div><div class="line">				updatedDefinitions.add(beanName);</div><div class="line">				<span class="keyword">this</span>.beanDefinitionNames = updatedDefinitions;</div><div class="line">				<span class="keyword">if</span> (<span class="keyword">this</span>.manualSingletonNames.contains(beanName)) &#123;</div><div class="line">					Set&lt;String&gt; updatedSingletons = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(<span class="keyword">this</span>.manualSingletonNames);</div><div class="line">					updatedSingletons.remove(beanName);</div><div class="line">					<span class="keyword">this</span>.manualSingletonNames = updatedSingletons;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// Still in startup registration phase</span></div><div class="line">			<span class="keyword">this</span>.beanDefinitionMap.put(beanName, beanDefinition);</div><div class="line">			<span class="keyword">this</span>.beanDefinitionNames.add(beanName);</div><div class="line">			<span class="keyword">this</span>.manualSingletonNames.remove(beanName);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">this</span>.frozenBeanDefinitionNames = <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (oldBeanDefinition != <span class="keyword">null</span> || containsSingleton(beanName)) &#123;</div><div class="line">		resetBeanDefinition(beanName);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的源码中我们呢需要关注<code>this.beanDefinitionMap.put(beanName, beanDefinition);</code>这句代码；这个Bean注入BeanDefineMap中；到此这里已经完成了IoC容器的初始化。</p>
+<blockquote>
+<p>到这里基本已经结束了；<code>ApplicationContext application = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);</code>这样一句代码其实；也写了一章节；其实如果你是看着篇文章可以参考我的方法堆栈进行阅读。最后文章的部分其实源都简明的展示给你；后期我希望可以使用更多图展示给大家。</p>
+</blockquote>
+<hr>
+<p>参考资料：</p>
+<ul>
+<li>《Spring技术内幕》</li>
+<li><a href="http://yikun.github.io/2015/05/29/Spring-IOC%E6%A0%B8%E5%BF%83%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" target="_blank" rel="external">Spring-IOC核心源码学习</a></li>
+<li><a href="http://www.cnblogs.com/xrq730/p/6285358.html" target="_blank" rel="external">【Spring源码分析】Bean加载流程概览 </a></li>
+</ul>
+
+      
+    </div>
+	
+	<div>
+	  
+		  <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span><a href="/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/">[原创]Spring源码教程02--Spring的IoC容器分析</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 weir 的个人博客">weir</a></p>
+  <p><span>发布时间:</span>2018年05月05日 - 17:05</p>
+  <p><span>最后更新:</span>2018年05月05日 - 17:05</p>
+  <p><span>原始链接:</span><a href="/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/" title="[原创]Spring源码教程02--Spring的IoC容器分析">http://will-we.com/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://will-we.com/2018/05/05/原创-Spring源码教程02-Spring的IoC容器分析/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+	clipboard.on('success', $(function(){
+	  $(".fa-clipboard").click(function(){
+		swal({   
+		  title: "",   
+		  text: '复制成功',   
+		  html: false,
+		  timer: 500,   
+		  showConfirmButton: false
+	    });
+	  });
+    }));  
+</script>
+
+      
+	</div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+	
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/后端/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/05/01-Http、Https、Http2-0-的基础知识总结（持续更新篇）/" rel="next" title="01_Http、Https、Http2.0 的基础知识总结（持续更新篇）">
+                <i class="fa fa-chevron-left"></i> 01_Http、Https、Http2.0 的基础知识总结（持续更新篇）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="weir" />
+          <p class="site-author-name" itemprop="name">weir</p>
+          <p class="site-description motion-element" itemprop="description">will we？will be well；this is weir.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Will-well" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-IoC容器启动过程"><span class="nav-number">1.</span> <span class="nav-text">Spring IoC容器启动过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource定位"><span class="nav-number">1.1.</span> <span class="nav-text">Resource定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource的载入"><span class="nav-number">1.2.</span> <span class="nav-text">Resource的载入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resouce文件的解析"><span class="nav-number">1.3.</span> <span class="nav-text">Resouce文件的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册IoC容器"><span class="nav-number">1.4.</span> <span class="nav-text">注册IoC容器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">weir</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共17.4k字</span>
+</div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+      
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129962"></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("0zS8rNs7ve9eIJxVc3qJjie1-gzGzoHsz", "aESjRj3ls3aaiXIs017T2I6T");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  <!-- 添加鼠标移动动态效果 -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+
+</body>
+</html>
