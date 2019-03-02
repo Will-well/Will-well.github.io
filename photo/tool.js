@@ -1,4 +1,4 @@
-<script src="\assets\js\APlayer.min.js"> </script>"use strict";
+<script src="\will-well.blog\assets\js\APlayer.min.js"> </script>"use strict";
 const fs = require("fs");
 const path = "../photos";
 
