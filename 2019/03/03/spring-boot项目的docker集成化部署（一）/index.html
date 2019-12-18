@@ -118,8 +118,8 @@
 <meta property="og:site_name" content="will-well">
 <meta property="og:description" content="spring-boot项目的docker集成化部署[toc] 前言 据说流行的微服务和docker一起，更配哦！接下来，使用简单spring-boot项目演示docker的集成化部署的案例，在看过微笑的博客觉得不过瘾，自己动手，下面的方案与Devops的方式比较接近；希望搭建理解这种思路。  基本思路与方案  开发者push到git服务器 Jenkins通过触发器收到通知 Jenkins克隆工">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&h=508&f=png&s=108076">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/6/166451caca49acea?w=1312&h=577&f=png&s=120318">
+<meta property="og:image" content="http://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&h=508&f=png&s=108076">
+<meta property="og:image" content="http://user-gold-cdn.xitu.io/2018/10/6/166451caca49acea?w=1312&h=577&f=png&s=120318">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/修改jenkins的_1538733645_20157.png">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/登录_1538733778_8467.png">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/安装推荐插件_1538733819_24609.png">
@@ -130,14 +130,14 @@
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/启动日志_1538734731_23737.png">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/启动docker_1538734598_3294.png">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/报错日志_1538734777_1374.png">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/6/166451cb5888e36f?w=949&h=139&f=png&s=29296">
+<meta property="og:image" content="http://user-gold-cdn.xitu.io/2018/10/6/166451cb5888e36f?w=949&h=139&f=png&s=29296">
 <meta property="og:image" content="https://picture-home-1254026250.cos.ap-beijing.myqcloud.com/img/blog/2018-10-06/服务器和jenkin_1538734928_8938.png">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/10/6/166451cb6201cac8?w=809&h=305&f=png&s=52097">
-<meta property="og:updated_time" content="2019-03-02T15:02:20.525Z">
+<meta property="og:image" content="http://user-gold-cdn.xitu.io/2018/10/6/166451cb6201cac8?w=809&h=305&f=png&s=52097">
+<meta property="og:updated_time" content="2019-12-18T16:44:08.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring-boot项目的docker集成化部署（一）">
 <meta name="twitter:description" content="spring-boot项目的docker集成化部署[toc] 前言 据说流行的微服务和docker一起，更配哦！接下来，使用简单spring-boot项目演示docker的集成化部署的案例，在看过微笑的博客觉得不过瘾，自己动手，下面的方案与Devops的方式比较接近；希望搭建理解这种思路。  基本思路与方案  开发者push到git服务器 Jenkins通过触发器收到通知 Jenkins克隆工">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&h=508&f=png&s=108076">
+<meta name="twitter:image" content="http://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&h=508&f=png&s=108076">
 
 
 
@@ -417,7 +417,7 @@
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>据说流行的微服务和docker一起，更配哦！接下来，使用简单spring-boot项目演示docker的集成化部署的案例，在看过微笑的博客觉得不过瘾，自己动手，下面的方案与Devops的方式比较接近；希望搭建理解这种思路。</p>
 </blockquote>
-<h2 id="基本思路与方案"><a href="#基本思路与方案" class="headerlink" title="基本思路与方案"></a>基本思路与方案</h2><p><img src="https://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&amp;h=508&amp;f=png&amp;s=108076" alt="docker化的流程图1"></p>
+<h2 id="基本思路与方案"><a href="#基本思路与方案" class="headerlink" title="基本思路与方案"></a>基本思路与方案</h2><p><img src="http://user-gold-cdn.xitu.io/2018/10/6/166451caca572083?w=947&amp;h=508&amp;f=png&amp;s=108076" alt="docker化的流程图1"></p>
 <ol>
 <li>开发者<code>push</code>到<code>git服务器</code></li>
 <li>Jenkins通过<code>触发器</code>收到通知</li>
@@ -429,7 +429,7 @@
 </li>
 </ol>
 <blockquote>
-<p><img src="https://user-gold-cdn.xitu.io/2018/10/6/166451caca49acea?w=1312&amp;h=577&amp;f=png&amp;s=120318" alt="docker化的流程图2"></p>
+<p><img src="http://user-gold-cdn.xitu.io/2018/10/6/166451caca49acea?w=1312&amp;h=577&amp;f=png&amp;s=120318" alt="docker化的流程图2"></p>
 </blockquote>
 <h2 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h2><h3 id="准备源码"><a href="#准备源码" class="headerlink" title="准备源码"></a>准备源码</h3><p>Github路径：<a href="https://gitee.com/will-we/spring-boot_docker_demo" target="_blank" rel="external">spring-boot_docker_demo</a></p>
 <blockquote>
@@ -546,7 +546,7 @@ docker run --name= springboot/spring-boot_docker_demo -p 8081:8080 -t srping-dem
 <blockquote>
 <p>自己试着摸着石头过河，只能借助搜索引擎了；如下是解决的流程：</p>
 </blockquote>
-<p>1）    安装Pipeline Maven Integration插件<br> <img src="https://user-gold-cdn.xitu.io/2018/10/6/166451cb5888e36f?w=949&amp;h=139&amp;f=png&amp;s=29296" alt=""><br>2）    检查环境变量</p>
+<p>1）    安装Pipeline Maven Integration插件<br> <img src="http://user-gold-cdn.xitu.io/2018/10/6/166451cb5888e36f?w=949&amp;h=139&amp;f=png&amp;s=29296" alt=""><br>2）    检查环境变量</p>
 <blockquote>
 <p>上面安装了插件后依旧不好使，继续找原因吧，Maven not found in Jenkins【StackOverflow】有着这个题问题：原因如下：<br>The reason is that Jenkins is installed and run as a ‚system user‘ service. This means the process can‘t see the ENV variables and PATH of your user (user level). Setting up maven in PATH and ENV variables on system level makes the trick.<br>大体意思是：jekins的无法读取系统的环境变量；于是分别查看了大致的服务器和jekins的变量。<br>Jenkins    服务器/bin/bash</p>
 </blockquote>
@@ -559,7 +559,7 @@ docker run --name= springboot/spring-boot_docker_demo -p 8081:8080 -t srping-dem
     maven &apos;m3&apos;
     jdk &apos;java8&apos;
 }
-</code></pre><p><img src="https://user-gold-cdn.xitu.io/2018/10/6/166451cb6201cac8?w=809&amp;h=305&amp;f=png&amp;s=52097" alt=""></p>
+</code></pre><p><img src="http://user-gold-cdn.xitu.io/2018/10/6/166451cb6201cac8?w=809&amp;h=305&amp;f=png&amp;s=52097" alt=""></p>
 <h5 id="2-Linux中端口占用问题"><a href="#2-Linux中端口占用问题" class="headerlink" title="2. Linux中端口占用问题"></a>2. Linux中端口占用问题</h5><pre><code>#方式一：参看端口8080信息
 netstat -lnp | grep 8080
 #方式二：参看端口8080信息
